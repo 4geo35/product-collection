@@ -1,0 +1,27 @@
+{
+    "name": "4geo35/product-collection",
+    "description": "Collection model for catalog",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir",
+            "email": "aweram-team@yandex.ru"
+        }
+    ],
+    "require": {
+        "4geo35/product-variation": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "GIS\\ProductCollection\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GIS\\ProductCollection\\ProductCollectionServiceProvider"
+            ]
+        }
+    }
+}
