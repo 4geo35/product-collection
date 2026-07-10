@@ -5,6 +5,9 @@ return [
     "customProductCollectionModel" => null,
     "customProductCollectionModelObserver" => null,
 
+    // Controllers
+    "customProductCollectionAdminController" => null,
+
     // Components
     "customAdminProductCollectionIndexComponent" => null,
 
