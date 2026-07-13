@@ -2,16 +2,16 @@
 
 namespace GIS\ProductCollection\Livewire\Admin\Collections;
 
-use GIS\ProductCollection\Interfaces\ProductCollectionModelInterface;
 use GIS\ProductCollection\Models\ProductCollection;
 use GIS\ProductCollection\Traits\ProductCollectionEditActionsTrait;
 use GIS\TraitsHelpers\Facades\BuilderActions;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class IndexWire extends Component
 {
-    use ProductCollectionEditActionsTrait;
+    use WithPagination, ProductCollectionEditActionsTrait;
 
     public string $searchTitle = "";
 
@@ -28,6 +28,7 @@ class IndexWire extends Component
     public function clearSearch(): void
     {
         $this->reset("searchTitle");
+        $this->resetPage();
     }
 
     public function showCreate(): void
@@ -45,9 +46,11 @@ class IndexWire extends Component
         $modelClass = config("product-collection.customProductCollectionModel") ?? ProductCollection::class;
         $modelClass::query()->create([
             "title" => trim($this->title),
+            "slug" => trim($this->slug),
         ]);
 
         session()->flash("success", "Коллекция успешно добавлена");
         $this->closeData();
+        $this->resetPage();
     }
 }

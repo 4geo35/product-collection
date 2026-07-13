@@ -14,11 +14,13 @@ trait ProductCollectionEditActionsTrait
     public int|null $collectionId = null;
 
     public string $title = "";
+    public string $slug = "";
 
     public function rules(): array
     {
         return [
             "title" => ["required", "string", "max:250"],
+            "slug" => ["nullable", "string", "max:250"],
         ];
     }
 
@@ -26,6 +28,7 @@ trait ProductCollectionEditActionsTrait
     {
         return [
             "title" => "Заголовок",
+            "slug" => "Адресная строка",
         ];
     }
 
@@ -44,6 +47,7 @@ trait ProductCollectionEditActionsTrait
         if (! $this->checkAuth("update", $model)) { return; }
 
         $this->title = (string) $model->title;
+        $this->slug = (string) $model->slug;
 
         $this->displayData = true;
     }
@@ -55,12 +59,22 @@ trait ProductCollectionEditActionsTrait
         if (! $this->checkAuth("update", $model)) { return; }
         $this->validate();
 
+        $slugHasChanged = $this->slug !== $model->slug;
+
         $model->update([
             "title" => trim($this->title),
+            "slug" => trim($this->slug),
         ]);
 
         session()->flash("success", "Коллекция успешно обновлена");
         $this->closeData();
+        if (isset($this->collection)) {
+            $model->fresh();
+            $this->collection = $model;
+            if ($slugHasChanged) {
+                $this->redirectRoute("admin.product-collections.show", ['collection' => $this->collection]);
+            }
+        }
     }
 
     public function closeDelete(): void
@@ -95,6 +109,10 @@ trait ProductCollectionEditActionsTrait
 
         session()->flash("success", "Коллекция успешно удалена");
         $this->closeDelete();
+        if (method_exists($this, "resetPage")) { $this->resetPage(); }
+        if (isset($this->collection)) {
+            $this->redirectRoute("admin.product-collections.index");
+        }
     }
 
     protected function findModel(): ?ProductCollectionModelInterface
@@ -112,7 +130,7 @@ trait ProductCollectionEditActionsTrait
 
     protected function resetFields(): void
     {
-        $this->reset("title", "collectionId");
+        $this->reset("title", "slug", "collectionId");
     }
 
     protected function checkAuth(string $action, ProductCollectionModelInterface $modelObject = null): bool

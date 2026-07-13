@@ -21,6 +21,17 @@
                 <x-tt::form.error name="title"/>
             </div>
 
+            <div>
+                <label for="slug" class="inline-block mb-2">
+                    Адресная строка
+                </label>
+                <input type="text" id="slug"
+                       class="form-control {{ $errors->has("slug") ? "border-danger" : "" }}"
+                       wire:loading.attr="disabled"
+                       wire:model="slug">
+                <x-tt::form.error name="slug"/>
+            </div>
+
             <div class="flex items-center space-x-indent-half">
                 <button type="button" class="btn btn-outline-dark" wire:click="closeData">
                     Отмена

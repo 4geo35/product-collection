@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use GIS\ProductCollection\Livewire\Admin\Collections\IndexWire as AdminProductCollectionIndexWire;
+use GIS\ProductCollection\Livewire\Admin\Collections\ShowWire as AdminProductCollectionShowWire;
 
 class ProductCollectionServiceProvider extends ServiceProvider
 {
@@ -52,14 +53,20 @@ class ProductCollectionServiceProvider extends ServiceProvider
     {
         $component = config("product-collection.customAdminProductCollectionIndexComponent");
         Livewire::component(
-            "pct-admin-product-collection-index",
+            "pct-admin-product-collections-index",
             $component ?? AdminProductCollectionIndexWire::class
+        );
+
+        $component = config("product-collection.customAdminProductCollectionShowComponent");
+        Livewire::component(
+            "pct-admin-product-collections-show",
+            $component ?? AdminProductCollectionShowWire::class
         );
     }
 
     protected function bindInterfaces(): void
     {
-        $modelClass = config("product-collection.customProductCollectionModel");
+        $modelClass = config("product-collection.customProductCollectionModel") ?? ProductCollection::class;
         $this->app->bind(ProductCollectionModelInterface::class, $modelClass);
     }
 

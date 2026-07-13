@@ -11,7 +11,11 @@
                 <td>{{ $item->title }}</td>
                 <td>
                     <div class="flex justify-center">
-                        <button type="button" class="btn btn-dark px-btn-x-ico rounded-e-none"
+                        <a href="{{ route('admin.product-collections.show', ['collection' => $item]) }}"
+                           class="btn btn-primary px-btn-x-ico rounded-e-none">
+                            <x-tt::ico.eye />
+                        </a>
+                        <button type="button" class="btn btn-dark px-btn-x-ico rounded-none"
                                 @cannot("update", $item) disabled
                                 @else wire:loading.attr="disabled"
                                 @endcannot
