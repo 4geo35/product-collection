@@ -31,6 +31,11 @@ class ProductCollection extends Model implements ProductCollectionModelInterface
             ->withTimestamps();
     }
 
+    public function orderedItems(): BelongsToMany
+    {
+        return $this->items()->withPivot("priority")->orderByPivot("priority");
+    }
+
     public function products(): BelongsToMany // collectionIncludes
     {
         $modelClass = config("category-product.customProductModel") ?? Product::class;

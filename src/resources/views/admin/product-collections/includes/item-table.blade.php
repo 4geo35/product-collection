@@ -6,11 +6,15 @@
         </tr>
     </x-slot>
     <x-slot name="body">
-        @foreach($collection->items as $item)
+        @foreach($productItems as $item)
             <tr>
-                <td></td>
+                <td>{{ $item->title }}</td>
                 <td>
                     <div class="flex justify-center">
+                        <a href="{{ route('admin.products.show', ['product' => $item]) }}"
+                           class="btn btn-primary px-btn-x-ico rounded-e-none">
+                            <x-tt::ico.eye />
+                        </a>
                         <button type="button" class="btn btn-danger px-btn-x-ico rounded-s-none"
                                 @cannot("delete", $collection) disabled
                                 @else wire:loading.attr="disabled"
