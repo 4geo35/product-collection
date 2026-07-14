@@ -1,3 +1,8 @@
+<x-tt::modal.confirm wire:model="displayDelete">
+    <x-slot name="title">Удалить товар из коллекции</x-slot>
+    <x-slot name="text">Товар перестанет отображаться в коллекции!</x-slot>
+</x-tt::modal.confirm>
+
 <x-tt::modal.dialog wire:model="displayData">
     <x-slot name="title">Добавить товар</x-slot>
     <x-slot name="content">

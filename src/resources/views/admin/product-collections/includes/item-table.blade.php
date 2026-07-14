@@ -6,6 +6,9 @@
         </tr>
     </x-slot>
     <x-slot name="body">
+        @if (!$productItems->count())
+            <div>По вашему запросу ничего не нашлось. Возможно, товары, которые вас интересуют, уже добавлены в коллекцию.</div>
+        @endif
         @foreach($productItems as $item)
             <tr>
                 <td>{{ $item->title }}</td>
@@ -19,7 +22,7 @@
                                 @cannot("delete", $collection) disabled
                                 @else wire:loading.attr="disabled"
                                 @endcannot
-                                wire:click="showDelete()">
+                                wire:click="showDelete({{ $item->id }})">
                             <x-tt::ico.trash/>
                         </button>
                     </div>

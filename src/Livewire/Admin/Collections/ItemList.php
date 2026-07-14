@@ -2,6 +2,7 @@
 
 namespace GIS\ProductCollection\Livewire\Admin\Collections;
 
+use GIS\CategoryProduct\Interfaces\ProductInterface;
 use GIS\CategoryProduct\Models\Product;
 use GIS\ProductCollection\Interfaces\ProductCollectionModelInterface;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -16,6 +17,8 @@ class ItemList extends Component
 
     public bool $displayData = false;
     public bool $displayDelete = false;
+
+    public int|null $productId = null;
 
     public string $searchTitle = "";
 
@@ -58,13 +61,9 @@ class ItemList extends Component
 
     public function addProduct(int $productId): void
     {
-        $modelClass = config("category-product.customProductModel") ?? Product::class;
-        $model = $modelClass::query()->find($productId);
-        if (! $model) {
-            session()->flash("products-modal-error", "Товар не найден");
-            $this->freshProductList();
-            return;
-        }
+        $this->productId = $productId;
+        $model = $this->findModel();
+        if (! $model) { return; }
 
         $exists = $this->collection->items()->where('product_id', $productId)->exists();
         if ($exists) {
@@ -89,6 +88,31 @@ class ItemList extends Component
         $this->displayDelete = false;
     }
 
+    public function showDelete(int $modelId): void
+    {
+        $this->resetFields();
+        $this->productId = $modelId;
+        if (! $this->checkAuth()) { return; }
+        $this->displayDelete = true;
+    }
+
+    public function confirmDelete(): void
+    {
+        if (! $this->checkAuth()) { return; }
+
+        try {
+            $this->collection->items()->detach($this->productId);
+        } catch (\Exception $exception) {
+            session()->flash("products-error", "Ошибка при удалении товара");
+            $this->closeDelete();
+            return;
+        }
+
+        session()->flash("products-success", "Товар успешно удален из коллекции");
+        $this->closeDelete();
+        $this->freshProductList();
+    }
+
     protected function freshProductList(): void
     {
         $modelClass = config("category-product.customProductModel") ?? Product::class;
@@ -109,6 +133,20 @@ class ItemList extends Component
     protected function resetFields(): void
     {
         $this->reset("searchTitle");
+    }
+
+    protected function findModel(): ?ProductInterface
+    {
+        $modelClass = config("category-product.customProductModel") ?? Product::class;
+        $model = $modelClass::query()->find($this->productId);
+        if (! $model) {
+            session()->flash("products-modal-error", "Товар не найден");
+            $this->closeData();
+            $this->closeDelete();
+            $this->freshProductList();
+            return null;
+        }
+        return $model;
     }
 
     protected function checkAuth(): bool
