@@ -4,5 +4,6 @@
 
     <div class="space-y-indent-half">
         <livewire:pct-admin-product-collections-show :$collection />
+        <livewire:pct-admin-product-collections-items-list :$collection />
     </div>
 </x-admin-layout>

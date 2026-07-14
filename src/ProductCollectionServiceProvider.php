@@ -12,6 +12,7 @@ use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use GIS\ProductCollection\Livewire\Admin\Collections\IndexWire as AdminProductCollectionIndexWire;
 use GIS\ProductCollection\Livewire\Admin\Collections\ShowWire as AdminProductCollectionShowWire;
+use GIS\ProductCollection\Livewire\Admin\Collections\ItemList as AdminProductCollectionItemsListWire;
 
 class ProductCollectionServiceProvider extends ServiceProvider
 {
@@ -61,6 +62,12 @@ class ProductCollectionServiceProvider extends ServiceProvider
         Livewire::component(
             "pct-admin-product-collections-show",
             $component ?? AdminProductCollectionShowWire::class
+        );
+
+        $component = config("product-collection.customAdminProductCollectionItemsListComponent");
+        Livewire::component(
+            "pct-admin-product-collections-items-list",
+            $component ?? AdminProductCollectionItemsListWire::class
         );
     }
 

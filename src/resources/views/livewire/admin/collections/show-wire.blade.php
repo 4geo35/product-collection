@@ -21,6 +21,5 @@
         </div>
     </div>
 
-
     @include("pct::admin.product-collections.includes.table-modals")
 </div>
