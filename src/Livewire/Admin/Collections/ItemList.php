@@ -5,6 +5,7 @@ namespace GIS\ProductCollection\Livewire\Admin\Collections;
 use GIS\CategoryProduct\Interfaces\ProductInterface;
 use GIS\CategoryProduct\Models\Product;
 use GIS\ProductCollection\Interfaces\ProductCollectionModelInterface;
+use GIS\ProductCollection\Models\ProductCollection;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -17,12 +18,16 @@ class ItemList extends Component
 
     public bool $displayData = false;
     public bool $displayDelete = false;
+    public bool $displayOrder = false;
 
     public int|null $productId = null;
 
     public string $searchTitle = "";
 
     public Collection $productList;
+
+    public Collection|null $list = null;
+    public bool $hasSearch = false;
 
     public function mount(): void
     {
@@ -111,6 +116,34 @@ class ItemList extends Component
         session()->flash("products-success", "Товар успешно удален из коллекции");
         $this->closeDelete();
         $this->freshProductList();
+    }
+
+    public function showOrder(): void
+    {
+        if (! $this->checkAuth()) { return; }
+        $this->displayOrder = true;
+        $this->setItemList();
+        $this->dispatch("update-list");
+    }
+
+    public function reorderItems(array $newOrder): void
+    {
+        if (! $this->checkAuth()) { return; }
+
+        foreach ($newOrder as $priority => $id) {
+            $this->collection->items()->updateExistingPivot($id, [
+                "priority" => $priority
+            ]);
+        }
+
+        $this->resetFields();
+        $this->setItemList();
+        $this->freshProductList();
+    }
+
+    protected function setItemList(): void
+    {
+        $this->list = $this->collection->orderedItems;
     }
 
     protected function freshProductList(): void

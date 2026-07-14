@@ -13,4 +13,5 @@
     </div>
 
     @include("pct::admin.product-collections.includes.item-modals")
+    @include("pct::admin.product-collections.includes.item-order-modal")
 </div>
