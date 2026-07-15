@@ -1,5 +1,4 @@
 <div>
-    <button type="button" class="btn btn-outline-warning" wire:click="test">Click</button>
     <div class="card">
         <div class="card-header border-b-0">
             <div class="space-y-indent-half">
@@ -10,4 +9,6 @@
         </div>
         @include("pct::admin.product-collections.includes.list-table")
     </div>
+    @include("pct::admin.product-collections.includes.list-modals")
+    @include("pct::admin.product-collections.includes.list-order-modal")
 </div>

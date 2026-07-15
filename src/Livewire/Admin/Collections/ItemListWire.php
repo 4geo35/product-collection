@@ -164,7 +164,7 @@ class ItemListWire extends Component
 
     protected function resetFields(): void
     {
-        $this->reset("searchTitle");
+        $this->reset("searchTitle", "productId");
     }
 
     protected function findModel(): ?ProductInterface

@@ -19,6 +19,11 @@
             <x-tt::notifications.success prefix="products-modal-" />
 
             <ul>
+                @if (!$productItems->count())
+                    <li class="py-2">
+                        По вашему запросу ничего не нашлось. Возможно, товары, которые вас интересуют, уже добавлены в коллекцию.
+                    </li>
+                @endif
                 @foreach($productList as $productItem)
                     <li class="py-2 border-b border-secondary last-of-type:border-b-0">
                         <div class="flex items-start justify-between space-x-indent-half">
