@@ -61,6 +61,7 @@ class ListWire extends Component
         $this->resetFields();
         if (! $this->checkAuth()) { return; }
         $this->displayData = true;
+        $this->freshCollectionList();
     }
 
     public function showAddCollection(int $collectionId): void

@@ -5,5 +5,6 @@
     <div class="space-y-indent-half">
         <livewire:pct-admin-product-collections-show :$collection />
         <livewire:pct-admin-product-collections-items-list :$collection />
+        @include("pct::admin.product-collections.includes.related-list")
     </div>
 </x-admin-layout>

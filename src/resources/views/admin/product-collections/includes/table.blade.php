@@ -1,7 +1,10 @@
+@php($wordArray = ["товар", "товара", "товаров"])
 <x-tt::table>
     <x-slot name="head">
         <tr>
             <x-tt::table.heading class="text-left text-nowrap">Заголовок</x-tt::table.heading>
+            <x-tt::table.heading class="text-left text-nowrap">Состав</x-tt::table.heading>
+            <x-tt::table.heading class="text-left text-nowrap">Ссылки</x-tt::table.heading>
             <x-tt::table.heading>Действия</x-tt::table.heading>
         </tr>
     </x-slot>
@@ -9,6 +12,18 @@
         @foreach($collections as $item)
             <tr>
                 <td>{{ $item->title }}</td>
+                <td>
+                    @php($itemsCount = $item->orderedItems->count())
+                    <div class="text-nowrap">
+                        <span class="font-semibold">{{ $itemsCount }}</span> {{ num2word($itemsCount, $wordArray) }}
+                    </div>
+                </td>
+                <td>
+                    @php($productsCount = $item->products->count())
+                    <div class="text-nowrap">
+                        <span class="font-semibold">{{ $productsCount }}</span> {{ num2word($productsCount, $wordArray) }}
+                    </div>
+                </td>
                 <td>
                     <div class="flex justify-center">
                         <a href="{{ route('admin.product-collections.show', ['collection' => $item]) }}"

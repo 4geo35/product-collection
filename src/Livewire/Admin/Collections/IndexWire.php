@@ -18,7 +18,8 @@ class IndexWire extends Component
     public function render(): View
     {
         $modelClass = config("product-collection.customProductCollectionModel") ?? ProductCollection::class;
-        $query = $modelClass::query();
+        $query = $modelClass::query()
+            ->with("orderedItems", "products");
         BuilderActions::extendLike($query, $this->searchTitle, "title");
         $query->orderBy("created_at", "DESC");
         $collections = $query->paginate();

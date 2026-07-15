@@ -61,6 +61,7 @@ class ItemListWire extends Component
         $this->resetFields();
         if (! $this->checkAuth()) { return; }
         $this->displayData = true;
+        $this->freshProductList();
     }
 
     public function addProduct(int $productId): void

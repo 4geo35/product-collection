@@ -1,7 +1,7 @@
 <x-tt::table>
     <x-slot name="head">
         <tr>
-            <x-tt::table.heading class="text-left text-nowrap">Товар</x-tt::table.heading>
+            <x-tt::table.heading class="text-left text-nowrap">Заголовок</x-tt::table.heading>
             <x-tt::table.heading>Действия</x-tt::table.heading>
         </tr>
     </x-slot>
