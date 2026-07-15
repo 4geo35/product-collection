@@ -12,6 +12,7 @@ return [
     "customAdminProductCollectionIndexComponent" => null,
     "customAdminProductCollectionShowComponent" => null,
     "customAdminProductCollectionItemsListComponent" => null,
+    "customAdminProductCollectionListComponent" => null,
 
     // Policies
     "productCollectionPolicy" => \GIS\ProductCollection\Policies\ProductCollectionPolicy::class,

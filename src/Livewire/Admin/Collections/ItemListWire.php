@@ -5,14 +5,13 @@ namespace GIS\ProductCollection\Livewire\Admin\Collections;
 use GIS\CategoryProduct\Interfaces\ProductInterface;
 use GIS\CategoryProduct\Models\Product;
 use GIS\ProductCollection\Interfaces\ProductCollectionModelInterface;
-use GIS\ProductCollection\Models\ProductCollection;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;
 
-class ItemList extends Component
+class ItemListWire extends Component
 {
     public ProductCollectionModelInterface $collection;
 

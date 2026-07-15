@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('product_collection_item', function (Blueprint $table) {
             $table->unsignedBigInteger("product_collection_id");
             $table->unsignedBigInteger("product_id");
+            $table->unsignedBigInteger("priority")->default(0);
             $table->dateTime("visible")->nullable();
             $table->timestamps();
         });

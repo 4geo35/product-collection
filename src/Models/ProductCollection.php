@@ -17,7 +17,7 @@ class ProductCollection extends Model implements ProductCollectionModelInterface
         "slug",
     ];
 
-    public function items(): BelongsToMany // collections
+    public function items(): BelongsToMany // collectionIncludes in Product
     {
         $modelClass = config("category-product.customProductModel") ?? Product::class;
         return $this
@@ -33,10 +33,10 @@ class ProductCollection extends Model implements ProductCollectionModelInterface
 
     public function orderedItems(): BelongsToMany
     {
-        return $this->items()->withPivot("priority")->orderByPivot("priority");
+        return $this->items()->orderByPivot("priority");
     }
 
-    public function products(): BelongsToMany // collectionIncludes
+    public function products(): BelongsToMany // collections in Product
     {
         $modelClass = config("category-product.customProductModel") ?? Product::class;
         return $this
@@ -46,7 +46,7 @@ class ProductCollection extends Model implements ProductCollectionModelInterface
                 "product_collection_id",
                 "product_id"
             )
-            ->withPivot("visible")
+            ->withPivot("visible", "priority")
             ->withTimestamps();
     }
 }
