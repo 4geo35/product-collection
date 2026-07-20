@@ -14,6 +14,9 @@ return [
     "customAdminProductCollectionItemsListComponent" => null,
     "customAdminProductCollectionListComponent" => null,
 
+    // Managers
+    "customProductCollectionActionsManager" => null,
+
     // Policies
     "productCollectionPolicy" => \GIS\ProductCollection\Policies\ProductCollectionPolicy::class,
     "productCollectionPolicyKey" => "product_collections",

@@ -8,7 +8,14 @@
     <x-slot name="body">
         @foreach($productItems as $item)
             <tr>
-                <td>{{ $item->title }}</td>
+                <td>
+                    <div>{{ $item->title }}</div>
+                    @if (! $item->published_at)
+                        <div class="font-semibold text-xs text-danger text-nowrap">
+                            Не опубликован
+                        </div>
+                    @endif
+                </td>
                 <td>
                     <div class="flex justify-center">
                         <a href="{{ route('admin.products.show', ['product' => $item]) }}"

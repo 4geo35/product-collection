@@ -3,6 +3,7 @@
 namespace GIS\ProductCollection;
 
 use GIS\Fileable\Traits\ExpandTemplatesTrait;
+use GIS\ProductCollection\Helpers\ProductCollectionActionsManager;
 use GIS\ProductCollection\Interfaces\ProductCollectionModelInterface;
 use GIS\ProductCollection\Models\ProductCollection;
 use GIS\ProductCollection\Observers\ProductCollectionObserver;
@@ -42,6 +43,10 @@ class ProductCollectionServiceProvider extends ServiceProvider
 
     protected function initFacades(): void
     {
+        $this->app->singleton("product-collection-actions", function () {
+            $managerClass = config("product-collection.customProductCollectionActionsManager") ?? ProductCollectionActionsManager::class;
+            return new $managerClass;
+        });
     }
 
     protected function observeModels(): void
