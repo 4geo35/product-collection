@@ -1,6 +1,10 @@
 <?php
 
 return [
+    // Settings
+    "useShufflePreview" => false, // По умолчанию сортируется по заголовку
+    "previewItemCount" => 3,
+
     // Models
     "customProductCollectionModel" => null,
     "customProductCollectionModelObserver" => null,
