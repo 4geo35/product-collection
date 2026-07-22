@@ -18,6 +18,8 @@ return [
     "customAdminProductCollectionItemsListComponent" => null,
     "customAdminProductCollectionListComponent" => null,
 
+    "customWebCollectionProductTeaserChooseVariationComponent" => null,
+
     // Managers
     "customProductCollectionActionsManager" => null,
 
@@ -27,5 +29,7 @@ return [
     "productCollectionPolicyTitle" => "Управление коллекциями товаров",
 
     // Templates
-    "templates" => [],
+    "templates" => [
+        "product-collection-teaser" => \GIS\ProductCollection\Templates\ProductCollectionTeaser::class,
+    ],
 ];

@@ -11,7 +11,8 @@
             @endif
             <div class="space-y-indent-half">
                 @foreach($collection->items as $item)
-                    <div>{{ $item->title }}</div>
+                    @php($product = \GIS\CategoryProduct\Facades\ProductActions::getTeaserData($item->id))
+                    <x-pct::product.teaser :$product />
                 @endforeach
             </div>
         @endforeach

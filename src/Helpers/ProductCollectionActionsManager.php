@@ -73,7 +73,6 @@ class ProductCollectionActionsManager
             }
         }
 
-        debugbar()->info($collections);
         return $collections;
     }
 
