@@ -19,6 +19,7 @@ return [
     "customAdminProductCollectionListComponent" => null,
 
     "customWebCollectionProductTeaserChooseVariationComponent" => null,
+    "customWebCollectionProductTeaserVariationToCartComponent" => null,
 
     // Managers
     "customProductCollectionActionsManager" => null,

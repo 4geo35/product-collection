@@ -6,6 +6,7 @@ use GIS\Fileable\Traits\ExpandTemplatesTrait;
 use GIS\ProductCollection\Helpers\ProductCollectionActionsManager;
 use GIS\ProductCollection\Interfaces\ProductCollectionModelInterface;
 use GIS\ProductCollection\Livewire\Web\Collections\CollectionProductTeaserChooseVariationWire;
+use GIS\ProductCollection\Livewire\Web\Collections\CollectionProductTeaserVariationToCartWire;
 use GIS\ProductCollection\Models\ProductCollection;
 use GIS\ProductCollection\Observers\ProductCollectionObserver;
 use GIS\UserManagement\Traits\ExpandPoliciesTrait;
@@ -87,6 +88,12 @@ class ProductCollectionServiceProvider extends ServiceProvider
         Livewire::component(
             "pct-web-collection-product-teaser-choose-variation",
             $component ?? CollectionProductTeaserChooseVariationWire::class
+        );
+
+        $component = config("product-collection.customWebCollectionProductTeaserVariationToCartComponent");
+        Livewire::component(
+            "pct-web-collection-product-teaser-variation-to-cart",
+            $component ?? CollectionProductTeaserVariationToCartWire::class
         );
     }
 

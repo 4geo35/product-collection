@@ -1,7 +1,6 @@
 @php($moreVariations = $variations->count() - 1)
 
 <div class="w-full flex items-end justify-between space-x-indent-xs">
-{{--    <div>Choose</div>--}}
     @if ($variation && $moreVariations)
         <div class="relative" x-data="{ show: false }">
             <div class="inline-flex items-center text-primary hover:text-primary-hover cursor-pointer"
