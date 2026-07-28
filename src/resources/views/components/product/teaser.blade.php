@@ -2,7 +2,7 @@
 @php($url = route("web.product", ["product" => $product]))
 @php($keyPostfix = $product->id . "-" . now()->timestamp . ($isPreview ? '-preview' : ''))
 
-<div class="p-indent-xs bg-white rounded-base shadow-md flex">
+<div class="p-indent-xs bg-white rounded-base shadow-md flex flex-col sm:flex-row space-y-indent-xs sm:space-y-0 {{ $isPreview ? 'lg:flex-col xl:flex-row lg:space-y-indent-xs xl:space-y-0' : '' }}">
     <a href="{{ $url }}" class="shrink-0 block w-[98px] h-[98px] mr-indent-half rounded-base overflow-hidden">
         @if ($product->cover)
             <img src="{{ route('thumb-img', ['template' => 'product-collection-teaser', 'filename' => $product->cover->file_name]) }}"

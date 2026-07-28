@@ -2,7 +2,7 @@
 
 namespace GIS\ProductCollection\Livewire\Web\Collections;
 
-use GIS\ProductVariation\Traits\ChangeVariationCartQuantityTrait;
+use GIS\VariationCart\Traits\ChangeVariationCartQuantityTrait;
 use GIS\ProductVariation\Traits\InitFirstVariation;
 use GIS\VariationCart\Facades\CartActions;
 use Illuminate\View\View;
@@ -46,14 +46,5 @@ class CollectionProductTeaserVariationToCartWire extends Component
         $this->variation = $result;
         $this->variationId = $variationId;
         $this->quantity = CartActions::getCartItemQuantity($variationId);
-    }
-
-    #[On("change-variation-quantity")]
-    public function changeQuantity(int $variationId, int $productId, int $quantity): void
-    {
-        if ($this->product->id != $productId) { return; }
-        if ($this->variationId != $variationId) { return; }
-        if ($this->quantity == $quantity) { return; }
-        $this->quantity = $quantity;
     }
 }
