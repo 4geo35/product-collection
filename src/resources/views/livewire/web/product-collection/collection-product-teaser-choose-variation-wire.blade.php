@@ -1,6 +1,6 @@
 @php($moreVariations = $variations->count() - 1)
 
-<div class="w-full flex items-end justify-between space-x-indent-xs">
+<div class="w-full flex flex-col-reverse xs:flex-row items-start xs:items-end justify-between space-x-indent-xs">
     @if ($variation && $moreVariations)
         <div class="relative" x-data="{ show: false }">
             <div class="inline-flex items-center text-primary hover:text-primary-hover cursor-pointer"
@@ -10,7 +10,7 @@
                 </div>
                 <x-tt::ico.arrow-down class="ml-2" />
             </div>
-            <div class="select-variation py-2 absolute min-w-[150px] max-w-[300px] max-h-[200px] rounded-base bg-white shadow-lg border border-stroke beautify-scrollbar overflow-y-auto"
+            <div class="select-variation py-2 absolute left-0 min-w-[150px] max-w-[300px] max-h-[200px] rounded-base bg-white shadow-lg border border-stroke beautify-scrollbar overflow-y-auto"
                  style="display: none" x-show="show" x-transition>
                 @foreach($variations as $item)
                     <div class="group">
@@ -27,7 +27,7 @@
     @endif
 
     @if ($variation)
-        <div class="ml-auto flex items-end">
+        <div class="flex items-start xs:items-end xs:ml-auto">
             <div class="text-h5-mobile sm:text-h5 font-semibold">
                 {{ $variation->human_price }} р. <span class="text-body/60 text-sm">/ {{ $variation->unit_text }}</span>
             </div>
