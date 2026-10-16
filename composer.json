@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "4geo35/variation-cart": "^1.1"
+        "4geo35/variation-cart": "^2.0"
     },
     "autoload": {
         "psr-4": {

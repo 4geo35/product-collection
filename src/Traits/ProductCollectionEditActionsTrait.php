@@ -133,7 +133,7 @@ trait ProductCollectionEditActionsTrait
         $this->reset("title", "slug", "collectionId");
     }
 
-    protected function checkAuth(string $action, ProductCollectionModelInterface $modelObject = null): bool
+    protected function checkAuth(string $action, ?ProductCollectionModelInterface $modelObject = null): bool
     {
         try {
             $modelClass = config("product-collection.customProductCollectionModel") ?? ProductCollection::class;
